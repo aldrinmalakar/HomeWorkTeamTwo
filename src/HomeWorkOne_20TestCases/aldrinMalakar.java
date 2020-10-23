@@ -55,6 +55,9 @@ public class aldrinMalakar {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
+    /**
+     * Testing functionality of the search button and confirming with assertion.
+     */
     @Test(enabled = true)
     public void searchBox() {
         driver.get(tdBankURL);
