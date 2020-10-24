@@ -10,6 +10,12 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Author: Shaila Hasib
+ * Date: October 23, 2020
+ * Test Cases for Amazon home page
+ */
+
 public class shailaHasib {
 
     WebDriver driver;
@@ -40,6 +46,10 @@ public class shailaHasib {
         Thread.sleep(3000);
         driver.findElement(By.xpath("//*[@id=\"ap_password_check\"]")).sendKeys("password123");
         Thread.sleep(10000);
+        /*
+        Create account button not selected for the purpose of
+        demonstrating test case multiple times using same credentials
+         */
     }
 
     @Test(enabled = false)
