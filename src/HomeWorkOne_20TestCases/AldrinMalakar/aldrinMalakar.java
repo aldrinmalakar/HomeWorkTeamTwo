@@ -44,7 +44,83 @@ public class aldrinMalakar {
 
     }
 
+    @Test(enabled = false)
+    public void mainLogo(){
 
+    }
+    @Test(enabled = false)
+    public void dropdownMoreTravels(){
+
+    }
+    @Test(enabled = false)
+    public void searchForHotel(){
+
+    }
+    @Test(enabled = false)
+    public void searchForFlight(){
+
+    }
+    @Test(enabled = false)
+    public void registraionPage(){
+
+    }
+    @Test(enabled = false)
+    public void verifyBlankRegistrationPage(){
+
+    }
+    @Test(enabled = false)
+    public void verifyRequiredFields(){
+
+    }
+    @Test(enabled = false)
+    public void verifyFlightSearchBeginswithOneWayTrip(){
+
+    }
+    @Test(enabled = false)
+    public void checkChangeRegionFunction(){
+
+    }
+    @Test(enabled = false)
+    public void checkMobileSignup(){
+
+    }
+    @Test(enabled = false)
+    public void checkVirtualAgentResponse(){
+
+    }
+
+    @Test(enabled = false)
+    public void checkSupportPageNavigationfromHomepage(){
+
+    }
+    @Test(enabled = false)
+    public void checkRentalCarFunction(){
+
+    }
+    @Test(enabled = false)
+    public void checkDailyDealsNavigation(){
+
+    }
+    @Test(enabled = false)
+    public void navigateToDealsAndSearchForComboDeals(){
+
+    }
+    @Test(enabled = false)
+    public void navigatetoJobSearch(){
+
+    }
+    @Test(enabled = false)
+    public void serarchForJobs(){
+
+    }
+    @Test(enabled = false)
+    public void checkIdeasForYourNextTrip(){
+
+    }
+    @Test(enabled = false)
+    public void checkNearbyVacationRentals(){
+
+    }
 
 
     @AfterMethod (alwaysRun = true)
