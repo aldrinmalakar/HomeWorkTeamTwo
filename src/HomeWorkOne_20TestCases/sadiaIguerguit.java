@@ -39,23 +39,6 @@ public class sadiaIguerguit {
             Thread.sleep(3000);
         }
 
-//    //test2
-//        @Test(enabled = true)
-//        public void searchForPersonalBankingProducts() throws InterruptedException {
-//        //open browser and navigate to TD Bank URL
-//        driver.get(tdBankUrl);
-//        //shows checking Account in Personal Products list
-          //driver.findElement(By.id("td-desktop-nav-dropdown-link-2")).sendKeys("Checking Account");
-//        //this for wait only
-//        Thread.sleep(3000);
-//        //click on the small icon next to products
-//         driver.findElement(By.cssSelector("#checkingAccountsGetDetails")).click();
-//         Thread.sleep(9000);
-//         //validate result
-//         String expectedResult = "\"Checking Account\"";
-//         String actualResult= driver.findElement(By.id("#checkingAccountsGetDetails")).getText();
-//         Assert.assertEquals(actualResult, expectedResult, "test fail: search keyword does not match" );
-//        }
 
     //Test2
     @Test(enabled = false)
@@ -169,7 +152,7 @@ public class sadiaIguerguit {
         Assert.assertEquals(actualResult, expectedResult, "Test Failed: search keyword doe not match");
     }
 
-    //Test8
+    //Test9
     @Test(enabled = false)
     public void searchBox1() throws InterruptedException {
         //open Chrome and navigate amazon url
@@ -185,7 +168,7 @@ public class sadiaIguerguit {
         String actualResult= driver.findElement(By.xpath("//*[@id=\"search\"]/span/div/span/h1/div/div[1]/div/div/span[3]")).getText();
         Assert.assertEquals(actualResult, expectedResult, "Test Failed: search keyword masks does not match");
     }
-    //Test9
+    //Test10
     @Test(enabled = false)
     public void searchBox2() throws InterruptedException {
         //open Chrome and navigate amazon url
@@ -202,7 +185,7 @@ public class sadiaIguerguit {
         Assert.assertEquals(actualResult, expectedResult, "Test Failed: search keyword masks does not match");
     }
 
-    //test10
+    //test11
     @Test(enabled = false)
     public void searchBox3() throws InterruptedException {
         //open Chrome and navigate amazon url
@@ -219,7 +202,7 @@ public class sadiaIguerguit {
 
     }
 
-    //Test11
+    //Test12
     @Test(enabled = false)
     public void amazonRegistry() throws InterruptedException {
         //open Chrome and navigate amazon url
@@ -232,7 +215,7 @@ public class sadiaIguerguit {
         Assert.assertEquals(actualResult, expectedResult, "Test Failed: search keyword masks does not match");
 
     }
-    //Test12
+    //Test13
     @Test(enabled = false)
     public void shoppingCart() throws InterruptedException {
         //open Chrome and navigate amazon url
@@ -246,7 +229,7 @@ public class sadiaIguerguit {
         Assert.assertEquals(actualResult, expectedResult, "Test Failed: search keyword masks does not match");
     }
 
-    //Test13
+    //Test14
     @Test(enabled = false)
     public void CustomerService() throws InterruptedException {
         //open Chrome and navigate amazon url
@@ -261,7 +244,7 @@ public class sadiaIguerguit {
 
     }
 
-    //Test14
+    //Test15
     @Test(enabled = false)
     public void amazonSearchIn() throws InterruptedException {
         //open Chrome and navigate amazon url
@@ -277,7 +260,7 @@ public class sadiaIguerguit {
         Assert.assertEquals(actualResult, expectedResult, "Test Failed: search keyword Books does not match");
 
     }
-    //Test15
+    //Test16
     @Test(enabled = false)
     public void signingWithAmazon() throws InterruptedException {
         //Open Browser and navigate to amazon URL
@@ -299,7 +282,7 @@ public class sadiaIguerguit {
         Thread.sleep(3000);
     }
 
-    //Test16
+    //Test17
     @Test(enabled = false)
     public void checkTitle(){
        // webdriver driver = new ChromeDriver();
@@ -310,7 +293,7 @@ public class sadiaIguerguit {
         Assert.assertEquals(actualTitle, expectedTitle, "test pass the title found");
     }
 
-    //Test17
+    //Test18
     @Test(enabled = false)
     public void checkTitle1(){
         // webdriver driver = new ChromeDriver();
@@ -321,7 +304,7 @@ public class sadiaIguerguit {
         Assert.assertEquals(actualTitle, expectedTitle, "test fail the title not found");
     }
 
-    //Test18
+    //Test19
     @Test(enabled = false)
     public void holidaysDeals() throws InterruptedException {
         //open Chrome and navigate amazon url
@@ -334,7 +317,7 @@ public class sadiaIguerguit {
         Assert.assertEquals(actualResult, expectedResult, "Test pass: search keyword holiday deal is match");
     }
 
-    //Test19
+    //Test20
     @Test(enabled = false)
     public void newReleases() throws InterruptedException {
     //open Chrome and navigate amazon url
@@ -347,7 +330,7 @@ public class sadiaIguerguit {
     Assert.assertEquals(actualResult, expectedResult, "Test pass: search keyword holiday deal is match");
 }
 
-//Test20
+//Test21
     @Test(enabled = true)
     public void wholeFoods() throws InterruptedException {
         //open Chrome and navigate amazon url
@@ -362,31 +345,6 @@ public class sadiaIguerguit {
         Assert.assertEquals(actualResult, expectedResult, "Test pass: search keyword holiday deal is match");
 
     }
-
-
-
-
-
-//        //validate test
-//        String expectedResult = "Sign-In";
-//        String actualResult = driver.findElement(By.xpath("//*[@id=\"authportal-main-section\"]/div[2]/div/div[1]/form/div/div/div/h1")).getText();
-//        Assert.assertEquals(expectedResult, actualResult, "test fail: the Sign-In does not match");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         @AfterMethod
         public void TearDown(){
