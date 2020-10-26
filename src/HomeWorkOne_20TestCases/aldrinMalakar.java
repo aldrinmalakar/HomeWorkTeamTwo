@@ -38,7 +38,6 @@ public class aldrinMalakar {
         String expectedLink = "https://www.td.com/us/en/personal-banking/online-banking/";
         String actualLink = driver.getCurrentUrl();
 
-
         //Validate Links
         Assert.assertEquals(actualLink, expectedLink, "Test Failed, Link Does Not Match");
         Thread.sleep(5000);
@@ -52,7 +51,7 @@ public class aldrinMalakar {
     public void playEnrollVideo() {
         driver.get(tdBankURL);
         driver.findElement(By.cssSelector("#product1_item0 > div > div.td-product-conatiner-height > div.td-product-image > div > div > a > img")).click();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5000, TimeUnit.SECONDS);
     }
 
     /**

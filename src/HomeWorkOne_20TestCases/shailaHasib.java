@@ -29,7 +29,7 @@ public class shailaHasib {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void createAmazonAccount() throws InterruptedException {
         driver.get(amazonUrl);
         Thread.sleep(3000);
@@ -62,7 +62,7 @@ public class shailaHasib {
         Thread.sleep(5000);
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void updateLocationZipCode(){
         driver.get(amazonUrl);
         driver.findElement(By.id("nav-packard-glow-loc-icon")).click();
