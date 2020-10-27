@@ -191,15 +191,37 @@ public class aldrinMalakar {
     public void checkVirtualAgentResponse() {
         driver.findElement(By.xpath("//div[@id='cpce-vac-launch']")).click();
 
-    }
-
-    @Test(enabled = false)
-    public void checkSupportPageNavigationfromHomepage() {
 
     }
 
-    @Test(enabled = false)
-    public void checkRentalCarFunction() {
+    @Test(enabled = true)
+    public void navigateToExpediaRewards() {
+        driver.findElement(By.xpath("//a[contains(.,'Expedia Rewards')]")).click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        String expected = "Our members save an average of $35 per booking with their points. You can too.";
+        String actual = driver.findElement(By.xpath(" //div[@class='heroContentContainer']//p//span")).getText();
+
+        Assert.assertEquals(actual,expected,"Test Faile: Expected Text is different than actual.");
+    }
+
+    @Test(enabled = true)
+    public void navigateToCarRental() {
+        //Verify tab starts with Rental Cars as the default option.
+        driver.findElement(By.cssSelector("a[href='?pwaLob=wizard-car-pwa']")).click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WebElement rentalCar = driver.findElement(By.xpath("//button[@aria-label='Pick-up']"));
+        rentalCar.sendKeys("SBN");
+        rentalCar.sendKeys(Keys.ARROW_DOWN);
+        rentalCar.sendKeys(Keys.ENTER);
+        rentalCar.sendKeys(Keys.TAB);
+        driver.findElement(By.xpath("//button[contains(text(),'Search')]")).click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        String expectedLocation = "South Bend, IN (SBN-South Bend Intl.)";
+        String actualLocation = driver.findElement(By.linkText("South Bend, IN (SBN-South Bend Intl.)")).getText();
+
+        Assert.assertEquals(actualLocation,expectedLocation,"Test Failed.");
 
     }
 
