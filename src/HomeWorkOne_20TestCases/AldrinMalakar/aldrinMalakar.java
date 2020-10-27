@@ -225,13 +225,31 @@ public class aldrinMalakar {
 
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void checkDailyDealsNavigation() {
+        driver.findElement(By.id("gc-custom-header-tool-bar-shop-menu")).click();
+        driver.findElement(By.cssSelector("nav[id='header-toolbar-nav'] a:nth-child(7)")).click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        //Verify that it opened on the right page.
+        String expected = "Travel deals + vacation ideas";
+        String actual = driver.findElement(By.xpath("//span[contains(.,'deals + vacation')]")).getText();
+        Assert.assertEquals(actual,expected,"Test Failed: Landing page is different than expected.");
 
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void navigateToDealsAndSearchForComboDeals() {
+        driver.findElement(By.id("gc-custom-header-tool-bar-shop-menu")).click();
+        driver.findElement(By.cssSelector("nav[id='header-toolbar-nav'] a:nth-child(7)")).click();
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("//a[contains(text(),'Package deals')]")).click();
+
+        //Validate with new URL
+        String expectedPackageURL="https://www.expedia.com/package-deals";
+        String actualPackageURL=driver.getCurrentUrl();
+        Assert.assertEquals(actualPackageURL,expectedPackageURL,"Test Failed, Link did not match to expectation.");
+
 
     }
 
