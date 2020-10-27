@@ -57,7 +57,7 @@ public class hakimLehamel {
         Assert.assertEquals(actualResult,expectedResult,"test failed!");
     }
 
-    @Test(enabled = false )
+    @Test(enabled = false)
     public void changeLanguageButton(){
         driver.findElement(By.xpath("//span[@class='icp-nav-flag icp-nav-flag-us']")).click();
         driver.findElement(By.xpath("//*[@id=\"customer-preferences\"]/div/div/form/div[1]/div[1]/div[2]/div/label/i")).click();

@@ -1,10 +1,8 @@
 package HomeWorkOne_20TestCases.AldrinMalakar;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -116,9 +114,6 @@ public class aldrinMalakar {
         System.out.println(driver.getTitle());
         System.out.println(driver.getWindowHandle());
 
-
-
-
     }
 
     @Test(enabled = true)
@@ -175,23 +170,58 @@ public class aldrinMalakar {
 
     }
 
-    @Test(enabled = false)
-    public void checkMobileSignup() {
+    @Test(enabled = true)
+    public void checkMobileSignup() throws InterruptedException {
+        /**
+         * @param: PhoneNumber: 5692456985
+         */
+        driver.findElement(By.id("phoneNumber")).sendKeys("5692456985");
+        driver.findElement(By.id("submitBtn")).click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        String expectedError = "Please enter a valid phone number.";
+        String actualError = driver.findElement(By.id("phoneNumber-error")).getText();
+
+        Assert.assertEquals(actualError, expectedError, "Test Failed: Error Text Not Found As Expected.");
+
 
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void checkVirtualAgentResponse() {
+        driver.findElement(By.xpath("//div[@id='cpce-vac-launch']")).click();
+
 
     }
 
-    @Test(enabled = false)
-    public void checkSupportPageNavigationfromHomepage() {
+    @Test(enabled = true)
+    public void navigateToExpediaRewards() {
+        driver.findElement(By.xpath("//a[contains(.,'Expedia Rewards')]")).click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
+        String expected = "Our members save an average of $35 per booking with their points. You can too.";
+        String actual = driver.findElement(By.xpath(" //div[@class='heroContentContainer']//p//span")).getText();
+
+        Assert.assertEquals(actual,expected,"Test Faile: Expected Text is different than actual.");
     }
 
-    @Test(enabled = false)
-    public void checkRentalCarFunction() {
+    @Test(enabled = true)
+    public void navigateToCarRental() {
+        //Verify tab starts with Rental Cars as the default option.
+        driver.findElement(By.cssSelector("a[href='?pwaLob=wizard-car-pwa']")).click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WebElement rentalCar = driver.findElement(By.xpath("//button[@aria-label='Pick-up']"));
+        rentalCar.sendKeys("SBN");
+        rentalCar.sendKeys(Keys.ARROW_DOWN);
+        rentalCar.sendKeys(Keys.ENTER);
+        rentalCar.sendKeys(Keys.TAB);
+        driver.findElement(By.xpath("//button[contains(text(),'Search')]")).click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        String expectedLocation = "South Bend, IN (SBN-South Bend Intl.)";
+        String actualLocation = driver.findElement(By.linkText("South Bend, IN (SBN-South Bend Intl.)")).getText();
+
+        Assert.assertEquals(actualLocation,expectedLocation,"Test Failed.");
 
     }
 
