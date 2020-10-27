@@ -159,9 +159,9 @@ public class aldrinMalakar {
 
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void checkChangeRegionFunction() {
-        driver.findElement(By.linkText("English")).click();
+        driver.findElement(By.xpath("//*[@id='secondaryNav']/div[2]/button/div")).click();
         driver.findElement(By.linkText("Change language")).click();
         driver.findElement(By.xpath("//label[@for='radio-language-2']")).click();
         driver.findElement(By.xpath("//button[@data-stid='apply-change-language']")).click();
