@@ -1,10 +1,8 @@
 package HomeWorkOne_20TestCases.AldrinMalakar;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -116,9 +114,6 @@ public class aldrinMalakar {
         System.out.println(driver.getTitle());
         System.out.println(driver.getWindowHandle());
 
-
-
-
     }
 
     @Test(enabled = true)
@@ -175,13 +170,26 @@ public class aldrinMalakar {
 
     }
 
-    @Test(enabled = false)
-    public void checkMobileSignup() {
+    @Test(enabled = true)
+    public void checkMobileSignup() throws InterruptedException {
+        /**
+         * @param: PhoneNumber: 5692456985
+         */
+        driver.findElement(By.id("phoneNumber")).sendKeys("5692456985");
+        driver.findElement(By.id("submitBtn")).click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        String expectedError = "Please enter a valid phone number.";
+        String actualError = driver.findElement(By.id("phoneNumber-error")).getText();
+
+        Assert.assertEquals(actualError, expectedError, "Test Failed: Error Text Not Found As Expected.");
+
 
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void checkVirtualAgentResponse() {
+        driver.findElement(By.xpath("//div[@id='cpce-vac-launch']")).click();
 
     }
 
