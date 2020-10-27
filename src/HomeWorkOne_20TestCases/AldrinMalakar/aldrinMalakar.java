@@ -10,6 +10,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.sql.Time;
 import java.util.concurrent.TimeUnit;
 
 public class aldrinMalakar {
@@ -26,7 +27,9 @@ public class aldrinMalakar {
         System.setProperty("webdriver.chrome.driver", browserDriverPath);
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
         driver.get(expediaURL);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
     }
 
@@ -89,10 +92,12 @@ public class aldrinMalakar {
     }
 
     @Test(enabled = true)
-    public void registraionPage() {
-        driver.findElement(By.xpath("//div[contains(text(),'Sign in')]")).click();
-        driver.findElement(By.xpath("//a[contains(text(),'Sign up, it’s free')]")).click();
-        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+    public void registraionPage() throws InterruptedException {
+        //click Sign Up to go to registration.
+        //driver.findElement(By.xpath("//*[@id='gc-custom-header-nav-bar-acct-menu']/div/div/div/div/div[1]/div/div/a[2]")).click();
+        driver.findElement(By.xpath("//a[contains(.,'Sign up, it’s free')]")).click();
+        Thread.sleep(2000);
+
 
         String expected = "Show us your human side...";
         String actual = driver.findElement(By.xpath("//h1[contains(.,'Show us your human side')]")).getText();
@@ -103,23 +108,70 @@ public class aldrinMalakar {
 
     }
 
-    @Test(enabled = false)
-    public void verifyBlankRegistrationPage() {
+    @Test(enabled = true)
+    public void verifyFeedbackPage() {
+
+        driver.findElement(By.xpath("//a[contains(.,'Feedback')]")).click();
+        driver.switchTo().window("Feedback");
+        System.out.println(driver.getTitle());
+        System.out.println(driver.getWindowHandle());
+
+
+
 
     }
 
-    @Test(enabled = false)
-    public void verifyRequiredFields() {
+    @Test(enabled = true)
+    public void verifyLoginPage() {
 
+        driver.findElement(By.xpath("//a[contains(text(),'Sign in')]/parent::div")).click();
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        driver.findElement(By.id("submitButton")).click();
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+
+        //Verifying the error message.
+        String expected= "Please enter your email address.";
+        String actual=driver.findElement(By.xpath("//p[@id='userEmailidError']")).getText();
+        Assert.assertEquals(actual,expected,"Test Failed, element wasn't accessible.");
+
+        /**
+         * @param: email: fakeemail@gmail.com
+         * @param: password: fakePassword1234
+         */
+        driver.findElement(By.id("signin-loginid")).sendKeys("fakeemail@gmail.com");
+        driver.findElement(By.id("signin-password")).sendKeys("fakePassword1234");
+        driver.findElement(By.id("submitButton")).click();
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+
+        //Verifying the login page
+        String expectedURL = "https://www.expedia.com/user/signin?ckoflag=0&uurl=e3id%3Dredr%26rurl%3D%2F";
+        String actualURL = driver.getCurrentUrl();
+        Assert.assertEquals(actualURL,expectedURL,"Test Failed. Page redirected to wrong URL.");
     }
 
-    @Test(enabled = false)
-    public void verifyFlightSearchBeginswithOneWayTrip() {
+    @Test(enabled = true)
+    public void verifyFlightTab() {
+        //Clicking Flights tab should open with Roundtrip as a default choice.
+        driver.findElement(By.xpath("//ul[@id='uitk-tabs-button-container']//span[contains(.,'Flights')]")).click();
+        String expectedTabText = "Roundtrip";
+        String actualTabText = driver.findElement(By.xpath("//span[contains(text(),'Roundtrip')]")).getText();
+        Assert.assertEquals(actualTabText,expectedTabText,"Test Failed. Default TAB is not Roundtrip.");
 
     }
 
     @Test(enabled = false)
     public void checkChangeRegionFunction() {
+        driver.findElement(By.linkText("English")).click();
+        driver.findElement(By.linkText("Change language")).click();
+        driver.findElement(By.xpath("//label[@for='radio-language-2']")).click();
+        driver.findElement(By.xpath("//button[@data-stid='apply-change-language']")).click();
+        driver.findElement(By.xpath("//button[@data-stid='picker-submit']")).click();
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+
+        //Verify website language is changed to mandarin"
+        String expected = "在新冠 (COVID-19) 疫情期间旅行";
+        String actual = driver.findElement(By.cssSelector("div[class='all-t-padding-six']")).getText();
+        Assert.assertEquals(actual,expected,"Test Failed: Language did not change as expected from Default English to Mandarin.");
 
     }
 
@@ -177,7 +229,7 @@ public class aldrinMalakar {
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
         driver.manage().deleteAllCookies();
-        driver.close();
+        driver.quit();
     }
 
 }

@@ -1,6 +1,5 @@
-package HomeWorkOne_20TestCases;
-
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -19,60 +18,94 @@ import java.util.concurrent.TimeUnit;
 public class shailaHasib {
 
     WebDriver driver;
+    String targetUrl = "https://www.target.com/";
     String amazonUrl = "https://www.amazon.com/";
-
+    //String expediaUrl ="https://www.expedia.com/";
     @BeforeMethod
-    public void startUp(){
+    public void startUp() throws InterruptedException {
         String chromeDriverPath = "/Users/shailahasib/Desktop/chromedriver";
         System.setProperty("webdriver.chrome.driver",chromeDriverPath);
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.get(targetUrl);
+        //driver.get(amazonUrl);
+        Thread.sleep(3000);
     }
 
     @Test(enabled = false)
-    public void createAmazonAccount() throws InterruptedException {
-        driver.get(amazonUrl);
-        Thread.sleep(3000);
-        //find and click sign in
-        driver.findElement(By.id("nav-link-accountList")).click();
-        Thread.sleep(3000);
-        driver.findElement(By.id("createAccountSubmit")).click();
-        Thread.sleep(3000);
-        driver.findElement(By.cssSelector("#ap_customer_name")).sendKeys("Sarah Abigail");
-        Thread.sleep(3000);
-        driver.findElement(By.cssSelector("#ap_email")).sendKeys("sarahabigail1990@yahoo.com");
-        Thread.sleep(3000);
-        driver.findElement(By.xpath("//*[@id=\"ap_password\"]")).sendKeys("password123");
-        Thread.sleep(3000);
-        driver.findElement(By.xpath("//*[@id=\"ap_password_check\"]")).sendKeys("password123");
-        Thread.sleep(10000);
-        /*
-        Create account button not selected for the purpose of
-        demonstrating test case multiple times using same credentials
-         */
+    public void homePage() throws InterruptedException {
+        //driver.get(targetUrl);
+        Thread.sleep(2000);
+        String expected = "Target : Expect More. Pay Less.";
+        String actual = driver.getTitle();
+        Assert.assertEquals(expected, actual, "Failed");
+
     }
 
     @Test(enabled = false)
-    public void bestSellersPageNavigation() throws InterruptedException {
-        driver.get(amazonUrl);
-        driver.findElement(By.cssSelector("#nav-xshop > a:nth-child(4)")).click();
-        String expectedText = "Amazon Best Sellers";
-        String actualText = driver.findElement(By.id("zg_banner_text_wrapper")).getText();
-        Assert.assertEquals(expectedText,actualText,"Failed: Text \"Best Seller\" not found");
+    public void location() throws InterruptedException {
+        String targetUrl = "https://www.target.com/";
+        //driver.get(targetUrl);
+        driver.findElement(By.xpath("//button[@id='storeId-utilityNavBtn']")).click();
+        driver.findElement(By.id("zipOrCityState")).sendKeys("11432");
         Thread.sleep(5000);
-    }
-
-    @Test(enabled = true)
-    public void updateLocationZipCode(){
-        driver.get(amazonUrl);
-        driver.findElement(By.id("nav-packard-glow-loc-icon")).click();
-        driver.findElement(By.id("GLUXZipUpdateInput")).sendKeys("11102");
-        driver.findElement(By.cssSelector("#GLUXZipUpdate > span > input")).click();
-        String expectedText = driver.findElement(By.xpath("//span[@id='glow-ingress-line2']")).getText();
-        String actualText = "Astoria 11102";
-        Assert.assertEquals(expectedText, actualText,"Failed");
+        driver.findElement(By.id("zipOrCityState")).sendKeys(Keys.ENTER);
+        String expected = "7000 AUSTIN ST, FOREST HILLS, NY 11375-1022";
+        String actual = driver.findElement(By.xpath("//div[contains(text(),'7000 AUSTIN ST, FOREST HILLS')]")).getText();
+        Assert.assertEquals(actual, expected, "Failed");
 
     }
+
+    @Test(enabled = false)
+    public void cartValidation(){
+        //driver.get(targetUrl);
+        driver.findElement(By.xpath("//a[@id='cart']")).click();
+        String expected ="Your cart is empty";
+        String actual= driver.findElement(By.xpath("//h1[@class='Heading__StyledHeading-sc-1m9kw5a-0 crGulm']")).getText();
+        Assert.assertEquals(actual,expected, "Failed");
+
+    }
+
+    @Test(enabled = false)
+    public void signIn(){
+        //driver.get(targetUrl);
+        driver.findElement(By.xpath("//a[@class='Link-sc-1khjl8b-0 dJwaza AccountLink-gx13jw-1 hoYfWX']")).click();
+        driver.findElement(By.id("accountNav-createAccount")).click();
+        driver.findElement(By.xpath("//input[@name='usernamecreateaccount']")).sendKeys("sarahabigail1990@yahoo.com");
+        driver.findElement(By.xpath("//input[@id='firstname']")).sendKeys("Sarah");
+        driver.findElement(By.xpath("//input[@name='lastnamecreateaccount']")).sendKeys("Abigail");
+        driver.findElement(By.xpath("//input[@name='phonecreateAccount']")).sendKeys("917-111-2222");
+        driver.findElement(By.xpath("//input[@name='passwordcreateaccount']")).sendKeys("Password1");
+        //driver.findElement(By.xpath("//button[@class ='sc-VigVT sc-jqCOkK iwmpYU']")).click();
+    }
+
+    @Test(enabled = false)
+    public void categoriesDropDown() throws InterruptedException {
+        //driver.get(targetUrl);
+        driver.findElement(By.xpath("//span[contains(text(),'Categories')]")).click();
+        String expected="Grocery";
+        String actual = driver.findElement(By.xpath("//*[@id=\"5xt1a\"]/a/div")).getText();
+        Thread.sleep(3000);
+        Assert.assertEquals(actual,expected,"Failed: Drop down did not open");
+
+    }
+
+    @Test(enabled = false)
+    public void trendingSearchesDisplay(){
+        driver.findElement(By.xpath("//input[@id='search']")).click();
+        String expected = "Trending searches";
+        String actual=driver.findElement(By.className("//div[@data-test='typeaheadListHeading']")).getText();
+        Assert.assertEquals(actual,expected,"Failed: Trending searches do not display");
+    }
+
+    @Test (enabled = false)
+    public void clearanceDeals(){
+        driver.findElement(By.xpath("//a[@id='secondary']")).click();
+        String expected ="Clearance";
+        String actual=driver.findElement(By.xpath("//*[@id=\"deals-clearance\"]/a/div")).getText();
+        Assert.assertEquals(actual,expected,"Failed: Clearance not under deals dropdown");
+    }
+
 
     @AfterMethod
     public void tearDown(){
