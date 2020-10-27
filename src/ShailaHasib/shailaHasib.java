@@ -1,4 +1,4 @@
-package HomeWorkOne_20TestCases;
+package ShailaHasib;
 
 
 import org.openqa.selenium.By;
@@ -36,7 +36,7 @@ public class shailaHasib {
         Thread.sleep(3000);
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void homePage() throws InterruptedException {
         //driver.get(targetUrl);
         Thread.sleep(2000);
@@ -110,9 +110,89 @@ public class shailaHasib {
         Assert.assertEquals(actual,expected,"Failed: Clearance not under deals dropdown");
     }
 
+    @Test(enabled = false)
+    public void signIn(){
+        driver.findElement(By.xpath("//a[@class='Link-sc-1khjl8b-0 dJwaza AccountLink-gx13jw-1 hoYfWX']")).click();
+        driver.findElement(By.xpath("//div[contains(text(),'Sign in')]")).click();
+        driver.findElement(By.xpath("//input[@id='username']")).sendKeys("lillytsktsk@yahoo.com");
+        driver.findElement(By.xpath("//input[@id='password']")).sendKeys("Password1");
+        driver.findElement(By.xpath("//button[@id='login']")).click();
+        driver.findElement(By.className("sc-bxivhb eVjFKg")).click();
+        driver.findElement(By.xpath("//button[@id='circle-skip']")).click();
+        String expected ="Lilly";
+        String actual =driver.findElement(By.className("styles__AccountName-sc-1kk0q5l-0 hVhJPq")).getText();
+        Assert.assertEquals(actual, expected, "Failed: Username is invalid or not displayed");
+    }
+
+    @Test(enabled = false)
+    public void featuredCategoriesDisplay(){
+        String expected ="Featured categories";
+        String actual= driver.findElement(By.xpath("//h2[contains(text(),'Featured categories')]")).getText();
+        Assert.assertEquals(actual, expected, "Failed");
+    }
+
+    @Test(enabled = false)
+    public void faceMaskFeatured(){
+        String expected ="Face Masks";
+        String actual =driver.findElement(By.xpath("//div[contains(text(),'Face Masks')]")).getText();
+        Assert.assertEquals(actual,expected, "Failed");
+    }
+
+    @Test(enabled = true)
+    public void helpButtonReturns(){
+        driver.findElement(By.xpath("//button[@data-test='footerMenu-Help']")).click();
+        driver.findElement(By.xpath("//div[contains(text(),'Returns')]")).click();
+    }
+
+    @Test
+    public void searchBoxResult() {
+        driver.findElement(By.xpath("//form[@class='searchInputForm']")).click();
+        driver.findElement(By.xpath("//input[@id='search']")).sendKeys("sunglasses");
+        driver.findElement(By.xpath("//*[@id=\"headerMain\"]/div[1]/form/button[2]")).click();
+        String expected = "“sunglasses”";
+        String actual =driver.findElement(By.xpath("//h2[contains(text(),'sunglasses')]")).getText();
+        Assert.assertEquals(actual,expected,"Failed");
+    }
+
+    @Test
+    public void weeklyAdd(){
+        driver.findElement(By.xpath("//div[1]/div[2]/div/div[1]/ul/li[2]")).click();
+        String expected ="Weekly Ads & Catalogs";
+        String actual = driver.findElement(By.className("desktop-title")).getText();
+        Assert.assertEquals(actual, expected,"Failed");
+
+    }
+
+    @Test
+    public void testRecallPage(){
+        driver.findElement(By.xpath("//*[@id=\"footer\"]/div[2]/ul[1]/li[1]/a")).click();
+        String expected = "Product Recalls";
+        String actual = driver.getTitle();
+        Assert.assertEquals(actual,expected,"Failed");
+    }
+
+    @Test
+    public void addToCart() throws InterruptedException {
+        driver.findElement(By.xpath("//form[@class='searchInputForm']")).click();
+        driver.findElement(By.xpath("//input[@id='search']")).sendKeys("sunglasses");
+        driver.findElement(By.xpath("//*[@id=\"headerMain\"]/div[1]/form/button[2]")).click();
+        driver.findElement(By.xpath("//*[@id=\"mainContainer\"]/div[4]/div[2]/div/div[1]/div[3]/div[2]/ul/li[1]/div/div[2]/div/div/div/div[5]/div[1]/div/div/button")).click();
+        Thread.sleep(3000);
+        String expected = "View cart & checkout";
+        String actual = driver.findElement(By.xpath("View cart & checkout")).getText();
+        Assert.assertEquals(actual,expected,"Failed");
+
+    }
+
+    @Test
+    public void ordersUnderSignIn(){
+        driver.findElement(By.xpath("//a[@class='Link-sc-1khjl8b-0 dJwaza AccountLink-gx13jw-1 hoYfWX']")).click();
+        driver.findElement(By.xpath("accountNav-orders")).click();
+    }
 
     @AfterMethod
     public void tearDown(){
         driver.quit();
     }
 }
+
