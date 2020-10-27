@@ -1,3 +1,6 @@
+package HomeWorkOne_20TestCases;
+
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -21,18 +24,19 @@ public class shailaHasib {
     String targetUrl = "https://www.target.com/";
     String amazonUrl = "https://www.amazon.com/";
     //String expediaUrl ="https://www.expedia.com/";
-    @BeforeMethod
+
+    @BeforeMethod(enabled = true)
     public void startUp() throws InterruptedException {
-        String chromeDriverPath = "/Users/shailahasib/Desktop/chromedriver";
+        String chromeDriverPath = "BrowserDriver/mac/chromedriver";
         System.setProperty("webdriver.chrome.driver",chromeDriverPath);
-        driver = new ChromeDriver();
+        driver =new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(targetUrl);
         //driver.get(amazonUrl);
         Thread.sleep(3000);
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void homePage() throws InterruptedException {
         //driver.get(targetUrl);
         Thread.sleep(2000);
@@ -67,7 +71,7 @@ public class shailaHasib {
     }
 
     @Test(enabled = false)
-    public void signIn(){
+    public void createAccount(){
         //driver.get(targetUrl);
         driver.findElement(By.xpath("//a[@class='Link-sc-1khjl8b-0 dJwaza AccountLink-gx13jw-1 hoYfWX']")).click();
         driver.findElement(By.id("accountNav-createAccount")).click();
@@ -106,8 +110,21 @@ public class shailaHasib {
         Assert.assertEquals(actual,expected,"Failed: Clearance not under deals dropdown");
     }
 
+    @Test(enabled = false)
+    public void signIn(){
+        driver.findElement(By.xpath("//a[@class='Link-sc-1khjl8b-0 dJwaza AccountLink-gx13jw-1 hoYfWX']")).click();
+        driver.findElement(By.id("accountNav-signIn")).click();
+        driver.findElement(By.xpath("//input[@id='username']")).sendKeys("lillytsktsk@yahoo.com");
+        driver.findElement(By.xpath("//input[@id='password']")).sendKeys("Password1");
+        driver.findElement(By.xpath("//button[@id='login']")).click();
+        driver.findElement(By.className("sc-bxivhb eVjFKg")).click();
+        driver.findElement(By.xpath("//button[@id='circle-skip']")).click();
+        String expected ="Lilly";
+        String actual =driver.findElement(By.className("styles__AccountName-sc-1kk0q5l-0 hVhJPq")).getText();
+        Assert.assertEquals(actual, expected, "Failed: Username is invalid or not displayed");
+    }
 
-    @AfterMethod
+    @AfterMethod(enabled = true)
     public void tearDown(){
         driver.quit();
     }
