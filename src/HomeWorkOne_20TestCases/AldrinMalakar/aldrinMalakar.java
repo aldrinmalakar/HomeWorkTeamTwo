@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.yaml.snakeyaml.events.Event;
 
 import java.sql.Time;
 import java.util.concurrent.TimeUnit;
@@ -33,7 +34,7 @@ public class aldrinMalakar {
 
     //Checking for navigating to correct homepage URL
     @Test(enabled = true)
-    public void checkLink(){
+    public void checkLink() {
         System.out.println("We Are Now Testing 20 Test Cases On: " + driver.getCurrentUrl());
         System.out.println("*****************************************************************");
 
@@ -60,7 +61,7 @@ public class aldrinMalakar {
 
         //Validate Links
         Assert.assertEquals(actualLink, expectedLink, "Test Failed, Link Does Not Match");
-        Assert.assertEquals(actualTitle,expectedTitle,"Title Does not match, Test Failed.");
+        Assert.assertEquals(actualTitle, expectedTitle, "Title Does not match, Test Failed.");
     }
 
     @Test(enabled = true)
@@ -72,8 +73,8 @@ public class aldrinMalakar {
         String expectedMenuText2 = "Things to do";
         String actualMenuText2 = driver.findElement(By.linkText("Things to do")).getText();
 
-        Assert.assertEquals(actualMenuText,expectedMenuText,"Test Failed. Menu could not be located, or did not function as expected.");
-        Assert.assertEquals(actualMenuText2,expectedMenuText2,"Test Failed. Menu could not be located, or did not function as expected.");
+        Assert.assertEquals(actualMenuText, expectedMenuText, "Test Failed. Menu could not be located, or did not function as expected.");
+        Assert.assertEquals(actualMenuText2, expectedMenuText2, "Test Failed. Menu could not be located, or did not function as expected.");
     }
 
     @Test(enabled = true)
@@ -81,7 +82,7 @@ public class aldrinMalakar {
         //Clicking "Stays" Tab to search for hotels.
         driver.findElement(By.xpath("//*[@id='uitk-tabs-button-container']/li[2]")).click();
 
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//button[contains(@aria-label,'Going to')]")).sendKeys(Keys.ARROW_DOWN);
         Thread.sleep(15000);
 
@@ -100,8 +101,7 @@ public class aldrinMalakar {
         String expected = "Show us your human side...";
         String actual = driver.findElement(By.xpath("//h1[contains(.,'Show us your human side')]")).getText();
 
-        Assert.assertEquals(actual,expected,"Test Failed. Registration page could not be reached.");
-
+        Assert.assertEquals(actual, expected, "Test Failed. Registration page could not be reached.");
 
 
     }
@@ -120,14 +120,14 @@ public class aldrinMalakar {
     public void verifyLoginPage() {
 
         driver.findElement(By.xpath("//a[contains(text(),'Sign in')]/parent::div")).click();
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.findElement(By.id("submitButton")).click();
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         //Verifying the error message.
-        String expected= "Please enter your email address.";
-        String actual=driver.findElement(By.xpath("//p[@id='userEmailidError']")).getText();
-        Assert.assertEquals(actual,expected,"Test Failed, element wasn't accessible.");
+        String expected = "Please enter your email address.";
+        String actual = driver.findElement(By.xpath("//p[@id='userEmailidError']")).getText();
+        Assert.assertEquals(actual, expected, "Test Failed, element wasn't accessible.");
 
         /**
          * @param: email: fakeemail@gmail.com
@@ -136,12 +136,12 @@ public class aldrinMalakar {
         driver.findElement(By.id("signin-loginid")).sendKeys("fakeemail@gmail.com");
         driver.findElement(By.id("signin-password")).sendKeys("fakePassword1234");
         driver.findElement(By.id("submitButton")).click();
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         //Verifying the login page
         String expectedURL = "https://www.expedia.com/user/signin?ckoflag=0&uurl=e3id%3Dredr%26rurl%3D%2F";
         String actualURL = driver.getCurrentUrl();
-        Assert.assertEquals(actualURL,expectedURL,"Test Failed. Page redirected to wrong URL.");
+        Assert.assertEquals(actualURL, expectedURL, "Test Failed. Page redirected to wrong URL.");
     }
 
     @Test(enabled = true)
@@ -150,7 +150,7 @@ public class aldrinMalakar {
         driver.findElement(By.xpath("//ul[@id='uitk-tabs-button-container']//span[contains(.,'Flights')]")).click();
         String expectedTabText = "Roundtrip";
         String actualTabText = driver.findElement(By.xpath("//span[contains(text(),'Roundtrip')]")).getText();
-        Assert.assertEquals(actualTabText,expectedTabText,"Test Failed. Default TAB is not Roundtrip.");
+        Assert.assertEquals(actualTabText, expectedTabText, "Test Failed. Default TAB is not Roundtrip.");
 
     }
 
@@ -161,12 +161,12 @@ public class aldrinMalakar {
         driver.findElement(By.xpath("//label[@for='radio-language-2']")).click();
         driver.findElement(By.xpath("//button[@data-stid='apply-change-language']")).click();
         driver.findElement(By.xpath("//button[@data-stid='picker-submit']")).click();
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         //Verify website language is changed to mandarin"
         String expected = "在新冠 (COVID-19) 疫情期间旅行";
         String actual = driver.findElement(By.cssSelector("div[class='all-t-padding-six']")).getText();
-        Assert.assertEquals(actual,expected,"Test Failed: Language did not change as expected from Default English to Mandarin.");
+        Assert.assertEquals(actual, expected, "Test Failed: Language did not change as expected from Default English to Mandarin.");
 
     }
 
@@ -202,7 +202,7 @@ public class aldrinMalakar {
         String expected = "Our members save an average of $35 per booking with their points. You can too.";
         String actual = driver.findElement(By.xpath(" //div[@class='heroContentContainer']//p//span")).getText();
 
-        Assert.assertEquals(actual,expected,"Test Faile: Expected Text is different than actual.");
+        Assert.assertEquals(actual, expected, "Test Faile: Expected Text is different than actual.");
     }
 
     @Test(enabled = true)
@@ -221,7 +221,7 @@ public class aldrinMalakar {
         String expectedLocation = "South Bend, IN (SBN-South Bend Intl.)";
         String actualLocation = driver.findElement(By.linkText("South Bend, IN (SBN-South Bend Intl.)")).getText();
 
-        Assert.assertEquals(actualLocation,expectedLocation,"Test Failed.");
+        Assert.assertEquals(actualLocation, expectedLocation, "Test Failed.");
 
     }
 
@@ -234,43 +234,76 @@ public class aldrinMalakar {
         //Verify that it opened on the right page.
         String expected = "Travel deals + vacation ideas";
         String actual = driver.findElement(By.xpath("//span[contains(.,'deals + vacation')]")).getText();
-        Assert.assertEquals(actual,expected,"Test Failed: Landing page is different than expected.");
+        Assert.assertEquals(actual, expected, "Test Failed: Landing page is different than expected.");
 
     }
 
     @Test(enabled = true)
-    public void navigateToDealsAndSearchForComboDeals() {
+    public void navigateToDealsAndSearchForComboDeals() throws InterruptedException {
         driver.findElement(By.id("gc-custom-header-tool-bar-shop-menu")).click();
         driver.findElement(By.cssSelector("nav[id='header-toolbar-nav'] a:nth-child(7)")).click();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        Thread.sleep(10000);
         driver.findElement(By.xpath("//a[contains(text(),'Package deals')]")).click();
 
         //Validate with new URL
-        String expectedPackageURL="https://www.expedia.com/package-deals";
-        String actualPackageURL=driver.getCurrentUrl();
-        Assert.assertEquals(actualPackageURL,expectedPackageURL,"Test Failed, Link did not match to expectation.");
+        String expectedPackageURL = "https://www.expedia.com/package-deals";
+        String actualPackageURL = driver.getCurrentUrl();
+        Assert.assertEquals(actualPackageURL, expectedPackageURL, "Test Failed, Link did not match to expectation.");
 
 
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void navigatetoJobSearch() {
+        driver.findElement(By.linkText("Jobs")).click();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+        String expected = "https://lifeatexpediagroup.com/";
+        String actual = driver.getCurrentUrl();
+        Assert.assertEquals(actual, expected, "Test Failed.");
+
 
     }
 
-    @Test(enabled = false)
-    public void serarchForJobs() {
+    @Test(enabled = true)
+    public void serarchForJobs() throws InterruptedException {
+        driver.findElement(By.linkText("Jobs")).click();
+        driver.findElement(By.id("hero_keyword_search_3")).sendKeys("software engineer");
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElement(By.id("hero_keyword_search_3")).sendKeys(Keys.ENTER);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Thread.sleep(5000);
+
+        String expected = "https://lifeatexpediagroup.com/jobs?keyword=software%20engineer";
+        String actual = driver.getCurrentUrl();
+
+        Assert.assertEquals(actual, expected, "Test Failed: Search result is not as expected.");
 
     }
 
-    @Test(enabled = false)
-    public void checkIdeasForYourNextTrip() {
+    @Test(enabled = true)
+    public void newFeature() throws InterruptedException {
+
+        driver.findElement(By.xpath("//div[@id='editorial-3']//div[@class='uitk-card uitk-grid snippet imagelayout-left-fullbleed uitk-card-with-border']")).click();
+
+        String expectedURL = "https://www.expedia.com/lp/halloween-deals/?rfrr=editorial.undefined.click";
+        String actualURL = driver.getCurrentUrl();
+        Assert.assertEquals(actualURL, expectedURL, "Test Failed: Link is not found or Promotion is over.");
+
+        String expectedHeader = "Halloween savings";
+        String actualHeader = driver.findElement(By.xpath("//h1[contains(text(),'Halloween savings')]")).getText();
+        Assert.assertEquals(actualHeader, expectedHeader, "Test Failed.");
 
     }
 
-    @Test(enabled = false)
-    public void checkNearbyVacationRentals() {
+    @Test(enabled = true)
+    public void testCheckCovidTravelGuide() throws InterruptedException {
+        Thread.sleep(5000);
+        driver.findElement(By.xpath("//span[contains(text(),'Book with flexibility')]")).click();
 
+        String expected = "https://www.expedia.com/lp/b/coronavirus-travel/flexibility-matters";
+        String actual = driver.getCurrentUrl();
+        Assert.assertEquals(actual, expected, "Test Failed. Not the correct page or element not found.");
     }
 
 
